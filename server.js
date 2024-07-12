@@ -14,15 +14,18 @@ const app = express();
 
 
 
-app.use(
-  helmet.contentSecurityPolicy({
+// Use Helmet to set security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"],
-      styleSrc: ["'self'"],
+      'default-src': ["'self'"],
+      'script-src': ["'self'"],
+      'style-src': ["'self'"],
+      // You can add more directives here as needed
     },
-  })
-);
+  },
+}));
 
 
 app.use('/public', express.static(process.cwd() + '/public'));
